@@ -61,7 +61,7 @@ connection.connect((err) => {
 				console.log(result)
 			});
 		})
-		res.send({ success: true })
+		res.send({ success: files.name })
 	})
 
 
@@ -70,12 +70,12 @@ connection.connect((err) => {
 		// var sql = "CREATE TABLE imageDB (name VARCHAR(255), address VARCHAR(255), image CHAR(100))";
 		connection.query(sql, function (err, result) {
 			// res.redirect('profile/' + result.insertId);
-			console.log(req.headers.host)
 			if (err) {
 				err.message
 			}
 
 			// const r = result?.filter(f => f.image = req.headers.host + "/images/" + f?.image)
+			console.log(result)
 
 			res.send(result)
 		});
