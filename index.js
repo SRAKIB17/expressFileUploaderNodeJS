@@ -8,7 +8,8 @@ const buffer = require('node:buffer')
 
 const mysql = require('mysql');
 const express = require('express');
-const path = require('path')
+const path = require('path');
+require('dotenv').config()
 const routes = require('./routes')
 
 const fileUpload = require('express-fileupload');
@@ -25,7 +26,7 @@ app.use(fileUpload({
 const connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
-
+	password: process.env.pass,
 	database: "movie_details"
 });
 connection.connect((err) => {
@@ -80,6 +81,7 @@ connection.connect((err) => {
 			if (err) {
 				err.message
 			}
+
 
 			res.sendFile(__dirname + '/images/' + name)
 		});
