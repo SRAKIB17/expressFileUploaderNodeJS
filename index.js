@@ -52,8 +52,8 @@ connection.connect((err) => {
 				res.send(err)
 			}
 			const file = files?.name
-			// const sql = `INSERT INTO imagedb (name, address) VALUES ('Company Inc', 'Highway 37','${file}')`;
-			const sql = `INSERT INTO imagedb (name, address, image) VALUES ('${name}', '${address}','${file}')`;
+			// const sql = `INSERT INTO imageDB (name, address) VALUES ('Company Inc', 'Highway 37','${file}')`;
+			const sql = `INSERT INTO imageDB (name, address, image) VALUES ('${name}', '${address}','${file}')`;
 			connection.query(sql, function (err, result) {
 				if (err) {
 					console.log(err.message)
@@ -66,7 +66,7 @@ connection.connect((err) => {
 
 
 	app.get('/', (req, res) => {
-		var sql = "select * from imagedb";
+		var sql = "select * from imageDB";
 		// var sql = "CREATE TABLE imageDB (name VARCHAR(255), address VARCHAR(255), image CHAR(100))";
 		connection.query(sql, function (err, result) {
 			// res.redirect('profile/' + result.insertId);
@@ -86,7 +86,7 @@ connection.connect((err) => {
 	app.get('/images/:name', (req, res) => {
 		const { name } = req.params;
 
-		var sql = "select * from imagedb";
+		var sql = "select * from imageDB";
 		connection.query(sql, function (err, result) {
 			// res.redirect('profile/' + result.insertId);
 			if (err) {
