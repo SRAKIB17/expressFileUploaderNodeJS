@@ -16,6 +16,7 @@ const fileUpload = require('express-fileupload');
 const app = express();
 app.use(express.json({ limit: '100mb' }))
 
+
 app.use(fileUpload({
 	limits: { fileSize: 100 * 1024 * 1024 },
 	useTempFiles: true,
@@ -23,12 +24,17 @@ app.use(fileUpload({
 }))
 
 
+
 const connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
+	host: process.env.HOST,
+	user: process.env.USER,
 	password: process.env.PASS,
-	database: "movie_details"
+	database: process.env.DB
 });
+
+
+
+
 connection.connect((err) => {
 	if (err) {
 		console.log(err.message)
@@ -61,6 +67,7 @@ connection.connect((err) => {
 
 	app.get('/', (req, res) => {
 		var sql = "select * from imagedb";
+		// var sql = "CREATE TABLE imageDB (name VARCHAR(255), address VARCHAR(255), image CHAR(100))";
 		connection.query(sql, function (err, result) {
 			// res.redirect('profile/' + result.insertId);
 			console.log(req.headers.host)
@@ -68,12 +75,13 @@ connection.connect((err) => {
 				err.message
 			}
 
-			const r = result?.filter(f => f.image = req.headers.host + "/images/" + f?.image)
+			// const r = result?.filter(f => f.image = req.headers.host + "/images/" + f?.image)
 
-			res.send(r)
+			res.send("r")
 		});
 
-	})
+	});
+
 
 	app.get('/images/:name', (req, res) => {
 		const { name } = req.params;
@@ -100,8 +108,6 @@ connection.connect((err) => {
 
 	})
 })
-
-
 
 app.listen(process.env.PORT || 8080, () => console.log(534453453))
 // connection.connect();
