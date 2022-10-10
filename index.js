@@ -63,11 +63,14 @@ connection.connect((err) => {
 		var sql = "select * from imagedb";
 		connection.query(sql, function (err, result) {
 			// res.redirect('profile/' + result.insertId);
+			console.log(req.headers.host)
 			if (err) {
 				err.message
 			}
+			
+			const r = result?.filter(f => f.image = req.headers.host + "/images/" + f?.image)
 
-			res.send(result)
+			res.send(r)
 		});
 
 	})
@@ -81,16 +84,22 @@ connection.connect((err) => {
 			if (err) {
 				err.message
 			}
+			const fs = require('node:fs')
 
+			const ff = path.resolve(__dirname + '/images/' + name);
+			if (fs.existsSync(ff)) {
+				res.sendFile(ff)
+			}
+			else {
+				res.writeHead(200, { "content-type": 'text/html' })
+				res.write('<h1>File not found</h1>');
+				res.end();
 
-			res.sendFile(__dirname + '/images/' + name)
+			}
 		});
 
 	})
-
-
 })
-
 
 
 
@@ -114,3 +123,18 @@ app.listen(8080, () => console.log(534453453))
 // app.get('/profile/:id', routes.profile);
 // //Middleware
 // app.listen(8080)
+
+// const encryptingPassword = (password) => {
+
+
+// 	let salt = crypto.randomBytes(Math.ceil(16))
+// 		.toString("hex");
+// 	// (B2) SHA512 HASH
+// 	let hash = crypto.createHmac("sha512", salt);
+// 	hash.update(password);
+// 	const hashValue = hash.digest("hex")
+// 	return {
+// 		salt: salt,
+// 		hash: hashValue
+// 	};
+// };
