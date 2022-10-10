@@ -67,7 +67,7 @@ connection.connect((err) => {
 			if (err) {
 				err.message
 			}
-			
+
 			const r = result?.filter(f => f.image = req.headers.host + "/images/" + f?.image)
 
 			res.send(r)
@@ -83,7 +83,7 @@ connection.connect((err) => {
 			// res.redirect('profile/' + result.insertId);
 			if (err) {
 				err.message
-			}
+			};
 			const fs = require('node:fs')
 
 			const ff = path.resolve(__dirname + '/images/' + name);
@@ -103,7 +103,7 @@ connection.connect((err) => {
 
 
 
-app.listen(8080, () => console.log(534453453))
+app.listen(process.env.PORT || 8080, () => console.log(534453453))
 // connection.connect();
 
 // global.db = connection;
