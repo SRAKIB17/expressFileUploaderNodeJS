@@ -77,7 +77,7 @@ connection.connect((err) => {
 
 			// const r = result?.filter(f => f.image = req.headers.host + "/images/" + f?.image)
 
-			res.send("r")
+			res.send(result)
 		});
 
 	});
