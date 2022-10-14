@@ -126,27 +126,6 @@ const db = new sqlite3.Database('test.db', (err) => {
 	}
 	console.log('Connected to the in-memory SQlite database.')
 })
-// var sql = "ALTER TABLE customers ADD COLUMN image BLOB";
-
-
-// var sql = "INSERT INTO customers (name, address, image) VALUES ('Company Inc', 'Highway 37', '[534554]')";
-
-
-// db.all(`SELECT * FROM Customers`, [], (err, row) => {
-// 	if (err) {
-// 		console.error(err.message);
-// 	}
-// 	console.log(row)
-// });
-// db.serialize(() => {
-// 	db.each(`SELECT DISTINCT  Name FROM Customers`, (err, row) => {
-// 		if (err) {
-// 			console.error(err.message);
-// 		}
-// 		console.log(row)
-// 	});
-
-// });
 
 
 let languages = ['NexJS', 'Typescript', 'ExprssJS', "react hook form"];
