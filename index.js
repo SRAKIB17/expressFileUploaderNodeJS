@@ -129,15 +129,15 @@ const db = new sqlite3.Database('test.db', (err) => {
 // var sql = "ALTER TABLE customers ADD COLUMN image BLOB";
 
 
-var sql = "INSERT INTO customers (name, address, image) VALUES ('Company Inc', 'Highway 37', '[534554]')";
+// var sql = "INSERT INTO customers (name, address, image) VALUES ('Company Inc', 'Highway 37', '[534554]')";
 
 
-db.get(`SELECT distinct * FROM Customers`, (err, row) => {
-	if (err) {
-		console.error(err.message);
-	}
-	console.log(row)
-});
+// db.all(`SELECT * FROM Customers`, [], (err, row) => {
+// 	if (err) {
+// 		console.error(err.message);
+// 	}
+// 	console.log(row)
+// });
 // db.serialize(() => {
 // 	db.each(`SELECT DISTINCT  Name FROM Customers`, (err, row) => {
 // 		if (err) {
@@ -145,46 +145,36 @@ db.get(`SELECT distinct * FROM Customers`, (err, row) => {
 // 		}
 // 		console.log(row)
 // 	});
+
 // });
 
 
+let languages = ['NexJS', 'Typescript', 'ExprssJS', "react hook form"];
 
-// // var sql = "Select * From customers";
-// const result = db.exec(sql, (err, result) => {
-// 	if (err) {
-// 		console.log(err.message)
-// 	}
+let placeholders = languages.map((language) => '(?)').join(',');
+let sql = 'INSERT INTO langs(name) VALUES ' + placeholders;
 
-// })
-// console.log(sqlite3.OPEN_READWRITE)
-
-// console.log(result)
-
-
-// Database Close
-// db.close((err) => {
-// 	if (err) {
-// 		console.log(err.message)
-// 	}
-// 	console.log('Close the database connection.');
-
-// })
-
-
-app.get('/test', async (req, res) => {
-	db.serialize(() => {
-		db.all(`SELECT * FROM Customers`, (err, row) => {
-			if (err) {
-				console.error(err.message);
-			}
-			// ff.s(row)
-			res.send(row)
-		});
-
-	});
-
-
+app.get('/sq/all', (req, res) => {
+	db.all('select * from customers', (err, row) => {
+		if (err) {
+			console.log(err.message)
+		}
+		res.send(row)
+	})
 })
+app.get('/sq/', (req, res) => {
+	var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
+	db.run(sql, function (err) {
+		if (err) {
+			console.log(err.message)
+		}
+		else {
+			res.status(200).json(this)
+		}
+	})
+})
+
+
 
 
 app.listen(process.env.PORT || 8080, () => console.log(534453453))
