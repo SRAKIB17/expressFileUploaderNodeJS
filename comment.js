@@ -29,7 +29,7 @@ const timeAgoSince = (date) => {
     return Math.floor(seconds) + " seconds ago";
 }
 const run = async () => {
-    const res = await fetch("http://localhost:8080/comment?u=" + url);
+    const res = await fetch("https://sql-db-uploader.herokuapp.com/comment?u=" + url);
     const data = await res.json();
     for (const comment of data || []) {
         commentList +=
@@ -172,7 +172,7 @@ const run = async () => {
 <div class="comment">
 ${commentList}
 </div>
-<form id="commentBox" action="http://localhost:8080/?u=${url}" method="post" enctype="multipart/form-data">
+<form id="commentBox" action="https://sql-db-uploader.herokuapp.com/?u=${url}" method="post" enctype="multipart/form-data">
   <div>
       <input type="text" name="name" id="name" placeholder="Name">
   </div>
