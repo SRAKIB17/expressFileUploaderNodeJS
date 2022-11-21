@@ -6,8 +6,6 @@
 const buffer = require('node:buffer')
 
 
-
-
 const mysql = require('mysql');
 const express = require('express');
 const path = require('path');
@@ -48,7 +46,7 @@ connection.connect((err) => {
 	app.get('/', (req, res) => {
 		// var sql = "select * from movie_details.imageDB";
 		const sql = 'CRE'
-		
+
 		// var sql = "CREATE TABLE imageDB (name VARCHAR(255), address VARCHAR(255), image CHAR(100))";
 		connection.query(sql, function (err, result) {
 			// res.redirect('profile/' + result.insertId);
@@ -57,7 +55,7 @@ connection.connect((err) => {
 			}
 
 			// const r = result?.filter(f => f.image = req.headers.host + "/images/" + f?.image)
-			
+
 
 			res.send(result)
 		});
